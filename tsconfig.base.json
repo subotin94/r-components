@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@r-components/core": ["libs/r-components/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
