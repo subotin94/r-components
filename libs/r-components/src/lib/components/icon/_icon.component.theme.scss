@@ -1,0 +1,13 @@
+@mixin r-icon-theme() {
+  width: 24px;
+  height: 24px;
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+  // @each $status in r-get-statuses() {
+  //   r-icon.status-#{$status} {
+  //     // color: r-theme(icon-#{$status}-color);
+  //   }
+  // }
+}

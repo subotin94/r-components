@@ -1,0 +1,10 @@
+<div class="r-drawer-backdrop" (click)="_onBackdropClicked()" *ngIf="hasBackdrop"
+     [class.r-drawer-shown]="_isShowingBackdrop()"></div>
+
+<ng-content select="r-drawer"></ng-content>
+
+<ng-content select="r-drawer-content">
+</ng-content>
+<r-drawer-content *ngIf="!_content">
+  <ng-content></ng-content>
+</r-drawer-content>

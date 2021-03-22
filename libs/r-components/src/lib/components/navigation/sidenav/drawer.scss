@@ -1,0 +1,170 @@
+// @use '../core/style/variables';
+// @use '../core/style/layout-common';
+// @use '../core/style/vendor-prefixes';
+// @use '../../cdk/a11y/a11y';
+
+$drawer-content-z-index: 1;
+$drawer-side-drawer-z-index: 2;
+$drawer-backdrop-z-index: 3;
+$drawer-over-drawer-z-index: 4;
+
+// // stylelint-disable max-line-length
+// // Mixin that creates a new stacking context.
+// // see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
+// // stylelint-enable
+@mixin drawer-stacking-context($z-index: 1) {
+  position: relative;
+  // Use a z-index to create a new stacking context. (We can't use transform because it breaks fixed
+  // positioning inside of the transformed element).
+  z-index: $z-index;
+}
+
+.r-drawer-container {
+  // We need a stacking context here so that the backdrop and drawers are clipped to the
+  // MatDrawerContainer. This creates a new z-index stack so we use low numbered z-indices.
+  // We create another stacking context in the '.r-drawer-content' and in each drawer so that
+  // the application content does not get messed up with our own CSS.
+  @include drawer-stacking-context();
+
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+
+  // Need this to take up space in the layout.
+  display: block;
+
+  // Hide the drawers when they're closed.
+  overflow: hidden;
+
+  // TODO(hansl): Update this with a more robust solution.
+  &[fullscreen] {
+    // @include layout-common.fill();
+
+    &.r-drawer-container-has-open {
+      overflow: hidden;
+    }
+  }
+
+  // When the consumer explicitly enabled the backdrop,
+  // we have to pull the side drawers above it.
+  &.r-drawer-container-explicit-backdrop .r-drawer-side {
+    z-index: $drawer-backdrop-z-index;
+  }
+
+  // Note that the `NoopAnimationsModule` is being handled inside of the component code.
+  &.ng-animate-disabled, .ng-animate-disabled & {
+    .r-drawer-backdrop, .r-drawer-content {
+      transition: none;
+    }
+  }
+}
+
+.r-drawer-backdrop {
+  // @include layout-common.fill();
+
+  display: block;
+
+  // Because of the new stacking context, the z-index stack is new and we can use our own
+  // numbers.
+  z-index: $drawer-backdrop-z-index;
+
+  // We use 'visibility: hidden | visible' because 'display: none' will not animate any
+  // transitions, while visibility will interpolate transitions properly.
+  // see https://developer.mozilla.org/en-US/docs/Web/CSS/visibility, the Interpolation
+  // section.
+  visibility: hidden;
+
+  &.r-drawer-shown {
+    visibility: visible;
+  }
+
+  .r-drawer-transition & {
+    transition: {
+      duration: 400ms;
+      timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
+      property: background-color, visibility;
+    }
+  }
+
+  // @include a11y.high-contrast(active, off) {
+  //   opacity: 0.5;
+  // }
+}
+
+.r-drawer-content {
+  @include drawer-stacking-context($drawer-content-z-index);
+
+  display: block;
+  height: 100%;
+  overflow: auto;
+
+  .r-drawer-transition & {
+    transition: {
+      duration: 400ms;
+      timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+      property: transform, margin-left, margin-right;
+    }
+  }
+}
+
+.r-drawer {
+  $high-contrast-border: solid 1px currentColor;
+
+  @include drawer-stacking-context($drawer-over-drawer-z-index);
+
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  outline: 0;
+  box-sizing: border-box;
+  overflow-y: auto; // TODO(kara): revisit scrolling behavior for drawers
+  transform: translate3d(-100%, 0, 0);
+
+  &, [dir='rtl'] &.r-drawer-end {
+    // @include a11y.high-contrast(active, off) {
+    //   border-right: $high-contrast-border;
+    // }
+  }
+
+  [dir='rtl'] &, &.r-drawer-end {
+    // @include a11y.high-contrast(active, off) {
+    //   border-left: $high-contrast-border;
+    //   border-right: none;
+    // }
+  }
+
+  &.r-drawer-side {
+    z-index: $drawer-side-drawer-z-index;
+  }
+
+  &.r-drawer-end {
+    right: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  [dir='rtl'] & {
+    transform: translate3d(100%, 0, 0);
+
+    &.r-drawer-end {
+      left: 0;
+      right: auto;
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+}
+
+// Note that this div isn't strictly necessary on all browsers, however we need it in
+// order to avoid a layout issue in Chrome. The issue is that in RTL mode the browser doesn't
+// account for the sidenav's scrollbar while positioning, which ends up pushing it partially
+// out of the screen. We work around the issue by having the scrollbar be on this inner container.
+.r-drawer-inner-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.r-sidenav-fixed {
+  position: fixed;
+}

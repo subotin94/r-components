@@ -1,0 +1,118 @@
+@import '@r-components/mixins';
+
+@mixin r-option-list-theme() {
+  background-color: white;
+  border-color: #e4e9f2;
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-radius: 0.25rem;
+  box-shadow: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin: 3px 0;
+
+  .option-list {
+    height: 100%;
+    max-height: 20rem;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+  }
+
+  $adjacent-border: 0.0625rem solid #e4e9f2;
+  &.position-top {
+    border-bottom: $adjacent-border;
+  }
+  &.position-bottom {
+    border-top: $adjacent-border;
+  }
+}
+
+r-option-group {
+  color: #8f9bb3;
+}
+
+// @each $size in r-get-sizes() {
+//   r-option-list.size-#{$size} r-option-group {
+//     font-size: r-theme(option-#{$size}-text-font-size);
+//     font-weight: r-theme(option-#{$size}-text-font-weight);
+//     line-height: r-theme(option-#{$size}-text-line-height);
+
+//     .option-group-title {
+//       padding: r-theme(option-#{$size}-padding);
+//     }
+
+//     r-option {
+//       padding-left: r-theme(option-group-#{$size}-start-padding);
+//     }
+//   }
+// }
+
+::ng-deep {
+  r-option {
+    background-color: white;
+    color: #222b45;
+
+    &.active {
+      background-color: rgba(143, 155, 179, 0.24);
+    }
+
+    &.selected {
+      background-color: #3366ff;
+      color: white;
+    }
+
+    &:focus {
+      background-color: rgba(143, 155, 179, 0.24);
+      outline: none;
+
+      &.selected {
+        background-color: #274bdb;
+        color: white;
+      }
+    }
+
+    &:hover {
+      background-color: r-theme(option-hover-background-color);
+      color: r-theme(option-hover-text-color);
+
+      &.selected {
+        background-color: r-theme(option-selected-hover-background-color);
+        color: r-theme(option-selected-hover-text-color);
+      }
+    }
+
+    &.multiple {
+      &.selected {
+        background-color: r-theme(option-background-color);
+        color: r-theme(option-text-color);
+      }
+
+      &:focus {
+        background-color: r-theme(option-focus-background-color);
+        color: r-theme(option-focus-text-color);
+      }
+    }
+  }
+}
+
+// @each $size in r-get-sizes() {
+//   r-option-list.size-#{$size} r-option {
+//     font-size: r-theme(option-#{$size}-text-font-size);
+//     font-weight: r-theme(option-#{$size}-text-font-weight);
+//     line-height: r-theme(option-#{$size}-text-line-height);
+//     padding: r-theme(option-#{$size}-padding);
+//   }
+// }
+
+::ng-deep {
+  r-option,
+  r-option-group {
+    @include disable-text-selection();
+
+    &[disabled] {
+      background-color: r-theme(option-disabled-background-color);
+      color: r-theme(option-disabled-text-color);
+    }
+  }
+}

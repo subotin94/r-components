@@ -1,0 +1,46 @@
+<r-navbar></r-navbar>
+<r-drawer-container class="example-container" autosize>
+  <r-drawer #drawer class="example-sidenav" mode="side" opened>
+    <p>Auto-resizing sidenav</p>
+    <p >Lorem, ipsum dolor sit amet consectetur.</p>
+    <button mat-raised-button>
+      Toggle extra text
+    </button>
+  </r-drawer>
+  <r-drawer-content>
+    <div class="example-sidenav-content">
+      <button type="button" mat-button (click)="drawer.toggle()">
+        Toggle sidenav
+      </button>
+    </div>
+    <r-select multiple="true" placeholder="Select Showcase" [formControl]="control">
+      <r-option value="1">
+        Option 1
+      </r-option>
+      <r-option value="2">
+        Option 2
+      </r-option>
+      <r-option value="3">
+        Option 3
+      </r-option>
+    </r-select>
+    <button (click)="dialog.open(dialogTemplate)">dialog</button>
+    <ng-content></ng-content>
+    <r-checkbox>Test</r-checkbox>
+  </r-drawer-content>
+</r-drawer-container>
+
+<ng-template #dialogTemplate>
+  Test
+  <r-select multiple="true" placeholder="Select Showcase" [formControl]="control">
+    <r-option value="1">
+      Option 1
+    </r-option>
+    <r-option value="2">
+      Option 2
+    </r-option>
+    <r-option value="3">
+      Option 3
+    </r-option>
+  </r-select>
+</ng-template>

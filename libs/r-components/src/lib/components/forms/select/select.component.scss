@@ -1,0 +1,19 @@
+@import "@r-components/mixins";
+
+:host {
+  display: inline-block;
+  r-icon {
+    @include r-component-animation(transform);
+  }
+  &.open {
+    r-icon {
+      transform: rotate(180deg);
+    }
+  }
+  .select-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 205px;
+  }
+}

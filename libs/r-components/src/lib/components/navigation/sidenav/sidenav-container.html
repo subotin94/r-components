@@ -1,0 +1,10 @@
+<div class="r-drawer-backdrop" (click)="_onBackdropClicked()" *ngIf="hasBackdrop"
+     [class.r-drawer-shown]="_isShowingBackdrop()"></div>
+
+<ng-content select="r-sidenav"></ng-content>
+
+<ng-content select="r-sidenav-content">
+</ng-content>
+<r-sidenav-content *ngIf="!_content" cdkScrollable>
+  <ng-content></ng-content>
+</r-sidenav-content>

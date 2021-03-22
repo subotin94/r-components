@@ -1,0 +1,25 @@
+@import "./checkbox.component.theme";
+
+:host {
+  @include r-checkbox-theme();
+  .label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    min-height: inherit;
+  }
+
+  .custom-checkbox {
+    flex-shrink: 0;
+  }
+}
+
+:host(.r-transition) {
+  .custom-checkbox {
+    @include r-component-animation(background-color, border, box-shadow);
+  }
+  .text {
+    @include r-component-animation(color);
+  }
+}

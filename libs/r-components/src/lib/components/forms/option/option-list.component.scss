@@ -1,0 +1,5 @@
+@import "./option-list.component.theme";
+
+:host {
+  @include r-option-list-theme();
+}

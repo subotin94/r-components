@@ -1,0 +1,22 @@
+<button [disabled]="disabled" (blur)="trySetTouched()" (keydown.arrowDown)="show()" (keydown.arrowUp)="show()"
+  class="select-button" type="button" #selectButton>
+
+  <ng-container *ngIf="selectionModel.length; else placeholderTemplate">
+    <ng-container *ngIf="customLabel; else defaultSelectionTemplate">
+      <ng-content select="r-select-label"></ng-content>
+    </ng-container>
+
+    <ng-template #defaultSelectionTemplate>{{ selectionView }}</ng-template>
+  </ng-container>
+
+  <ng-template #placeholderTemplate>{{ placeholder }}</ng-template>
+
+  <r-icon icon="chevron-down-outline" pack="nebular-essentials" (click)="disabled && $event.stopPropagation()"
+    aria-hidden="true">
+  </r-icon>
+</button>
+
+<r-option-list [@transformPanel]="isOpen ? (multiple ? 'showing-multiple' : 'showing') : 'void'" *cdkPortal
+  [size]="size" [style.width.px]="hostWidth" [ngClass]="optionsListClass">
+  <ng-content select="r-option, r-option-group"></ng-content>
+</r-option-list>

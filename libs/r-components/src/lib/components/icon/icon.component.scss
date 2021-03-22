@@ -1,0 +1,6 @@
+@import "./icon.component.theme";
+
+:host {
+  display: inline-block;
+  @include r-icon-theme();
+}
