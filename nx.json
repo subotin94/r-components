@@ -16,6 +16,8 @@
     }
   },
   "projects": {
-    "r-components": { "tags": ["scope:public", "type:util", "target:all"] }
+    "r-components": { "tags": ["scope:public", "type:util", "target:all"] },
+    "demo": { "tags": [] },
+    "demo-e2e": { "tags": [], "implicitDependencies": ["demo"] }
   }
 }
