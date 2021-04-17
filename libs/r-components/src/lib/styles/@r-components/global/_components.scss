@@ -1,0 +1,7 @@
+@import "../../../components/forms/select/select.component.theme";
+@import "../../../components/forms/checkbox/checkbox.component.theme";
+
+@mixin r-theme-components() {
+  @include r-select-theme();
+  @include r-checkbox-theme();
+}

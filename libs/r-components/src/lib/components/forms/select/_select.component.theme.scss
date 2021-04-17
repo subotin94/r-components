@@ -1,0 +1,58 @@
+@import './select-outline';
+@import './select-filled';
+@import './select-hero';
+
+@mixin r-select-theme() {
+  r-select .select-button {
+    min-width: r-theme(select-min-width);
+    cursor: r-theme(select-cursor);
+    font-family: r-theme(select-text-font-family);
+
+    &.placeholder {
+      font-family: r-theme(select-placeholder-text-font-family);
+    }
+    &:focus {
+      outline: none;
+    }
+    &[disabled] {
+      cursor: r-theme(select-disabled-cursor);
+    }
+  }
+
+  @each $size in r-get-sizes() {
+    r-select.size-#{$size} {
+      .select-button {
+        font-size: r-theme(select-#{$size}-text-font-size);
+        font-weight: r-theme(select-#{$size}-text-font-weight);
+        line-height: r-theme(select-#{$size}-text-line-height);
+
+        &.placeholder {
+          font-size: r-theme(select-#{$size}-placeholder-text-font-size);
+          font-weight: r-theme(select-#{$size}-placeholder-text-font-weight);
+        }
+
+        &.empty::before {
+          content: ' ';
+          display: block;
+          height: r-theme(select-#{$size}-text-line-height);
+        }
+      }
+
+      &:not(.full-width) {
+        max-width: r-theme(select-#{$size}-max-width);
+      }
+    }
+  }
+
+  @each $shape in r-get-shapes() {
+    r-select.shape-#{$shape} .select-button {
+      border-radius: r-theme(select-#{$shape}-border-radius);
+    }
+  }
+
+  @include select-outline();
+  @include select-filled();
+  @include select-hero();
+
+  @include r-form-field-root-component('r-select');
+}

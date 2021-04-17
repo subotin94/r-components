@@ -1,0 +1,53 @@
+@import '../form-field/form-field.component.theme';
+
+@mixin select-filled {
+  r-select.appearance-filled .select-button {
+    border-style: r-theme(select-filled-border-style);
+    border-width: r-theme(select-filled-border-width);
+  }
+
+  @each $size in r-get-sizes() {
+    r-select.appearance-filled.size-#{$size} .select-button {
+      padding: r-theme(select-filled-#{$size}-padding);
+      @include r-ltr(padding-right, r-theme(select-icon-offset));
+      @include r-rtl(padding-left, r-theme(select-icon-offset));
+    }
+
+    @include r-form-field-with-prefix('r-select.appearance-filled.size-#{$size} .select-button', $size);
+  }
+
+  @each $status in r-get-statuses() {
+    r-select.appearance-filled.status-#{$status} .select-button {
+      background-color: r-theme(select-filled-#{$status}-background-color);
+      border-color: r-theme(select-filled-#{$status}-border-color);
+      color: r-theme(select-filled-#{$status}-text-color);
+
+      &.placeholder {
+        color: r-theme(select-filled-#{$status}-placeholder-text-color);
+      }
+
+      &:focus {
+        background-color: r-theme(select-filled-#{$status}-focus-background-color);
+        border-color: r-theme(select-filled-#{$status}-focus-border-color);
+      }
+      &:hover {
+        background-color: r-theme(select-filled-#{$status}-hover-background-color);
+        border-color: r-theme(select-filled-#{$status}-hover-border-color);
+      }
+
+      &[disabled] {
+        background-color: r-theme(select-filled-#{$status}-disabled-background-color);
+        border-color: r-theme(select-filled-#{$status}-disabled-border-color);
+        color: r-theme(select-filled-#{$status}-disabled-text-color);
+
+        r-icon {
+          color: r-theme(select-filled-#{$status}-disabled-icon-color);
+        }
+      }
+
+      r-icon {
+        color: r-theme(select-filled-#{$status}-icon-color);
+      }
+    }
+  }
+}

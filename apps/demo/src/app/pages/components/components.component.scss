@@ -1,0 +1,5 @@
+@import "@r-components/mixins";
+
+:host {
+  @include r-block-page();
+}

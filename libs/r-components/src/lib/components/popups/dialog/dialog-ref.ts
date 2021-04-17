@@ -38,7 +38,7 @@ export class RDialogRef<T, R = any> {
   private _result: R | undefined;
 
   /** Handle to the timeout that's running as a fallback in case the exit anirion doesn't fire. */
-  private _closeFallbackTimeout: number;
+  private _closeFallbackTimeout: number | any;
 
   /** Current state of the dialog. */
   private _state = RDialogState.OPEN;

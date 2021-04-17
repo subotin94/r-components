@@ -48,7 +48,7 @@ export class RSidenavContent extends RDrawerContent {
 
 @Component({
   selector: 'r-sidenav',
-  exportAs: 'matSidenav',
+  exportAs: 'rSidenav',
   templateUrl: 'drawer.html',
   animations: [rDrawerAnimations.transformDrawer],
   host: {
@@ -100,7 +100,7 @@ export class RSidenav extends RDrawer {
 
 @Component({
   selector: 'r-sidenav-container',
-  exportAs: 'matSidenavContainer',
+  exportAs: 'rSidenavContainer',
   templateUrl: 'sidenav-container.html',
   styleUrls: ['drawer.scss'],
   host: {

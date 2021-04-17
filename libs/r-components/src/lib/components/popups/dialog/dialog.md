@@ -1,5 +1,5 @@
-The `RDialog` service can be used to open modal dialogs with Rerial Design styling and
-anirions.
+The `RDialog` service can be used to open modal dialogs with R Design styling and
+animations.
 
 <!-- example(dialog-overview) -->
 

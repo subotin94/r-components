@@ -1,0 +1,64 @@
+@import '../../themes/mapping';
+
+@function r-get-enabled-themes() {
+
+  @if (length($r-enabled-themes) == 0) {
+    @each $theme-name, $theme in $r-themes {
+      $r-enabled-themes: append($r-enabled-themes, $theme-name) !global;
+    }
+  }
+  @return $r-enabled-themes;
+}
+
+@function get-last-enabled-theme() {
+  $themes: r-get-enabled-themes();
+  @return nth($themes, length($themes));
+}
+
+@function r-set-for-export($theme, $name, $parent-name: null) {
+
+  $parent-theme: map-get($r-themes-export, $parent-name);
+  @if ($parent-theme != null) {
+    $theme: map-merge(map-get($parent-theme, data), $theme);
+  }
+
+  $theme-data: (
+    data: $theme,
+    parent: $parent-name,
+  );
+  @return map-set($r-themes-export, $name, $theme-data);
+}
+
+@function r-get-registered-theme($name) {
+  $theme: map-get($r-themes, $name);
+
+  // TODO: check if optimal place
+  @if ($theme == null) {
+    @error 'R Theme: theme `' + $name + '` is not registered with `r-register-theme` function.';
+  }
+
+  @return $theme;
+}
+
+// Entry point
+// Registers a new theme
+@function r-register-theme($theme, $name, $parent-name: null) {
+
+  @if ($r-theme-export-mode == true) {
+    $r-themes-export: r-set-for-export($theme, $name, $parent-name) !global;
+  }
+
+  $theme-data: ();
+
+  @if ($parent-name != null) {
+    $parent-theme: map-get($r-themes, $parent-name);
+    @if ($parent-theme == null) {
+      @error 'R Theme: parent theme `' + $parent-name + '` is not registered or imported.';
+    }
+    $theme: map-merge($parent-theme, $theme);
+  }
+  $theme: map-merge($r-design-mapping, $theme);
+  $r-themes: map-set($r-themes, $name, $theme) !global;
+
+  @return $r-themes;
+}

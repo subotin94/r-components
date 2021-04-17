@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RCheckboxModule } from '../../forms/checkbox/checkbox.module';
 import { RDialogModule } from '../../popups/dialog';
 import { RSidenavModule } from '../../navigation/sidenav';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RSidenavModule } from '../../navigation/sidenav';
     ReactiveFormsModule,
     RCheckboxModule,
     RDialogModule,
+    RouterModule,
   ],
   exports: [
     RLayoutComponent

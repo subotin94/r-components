@@ -1,0 +1,15 @@
+.overview {
+  display: flex;
+  height: 500px;
+  width: 500px;
+  ::ng-deep {
+    r-drawer-container {
+      min-height: 100% !important;
+      min-width: 100% !important;
+    }
+    r-drawer-content {
+      min-height: 100% !important;
+      height: auto !important;
+    } 
+  }
+}

@@ -1,0 +1,15 @@
+@function r-get-core-statuses() {
+  @return 'basic', 'primary', 'success', 'warning', 'danger', 'info', 'control';
+}
+
+@function r-get-statuses() {
+  @return join(r-get-core-statuses(), $r-custom-statuses);
+}
+
+@function r-get-sizes() {
+  @return 'tiny', 'small', 'medium', 'large', 'giant';
+}
+
+@function r-get-shapes() {
+  @return 'rectangle', 'semi-round', 'round';
+}

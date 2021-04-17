@@ -138,7 +138,6 @@ export class RCheckboxComponent implements AfterViewInit, ControlValueAccessor {
   ) { }
 
   ngAfterViewInit() {
-    // TODO: #2254
     this.zone.runOutsideAngular(() => setTimeout(() => {
       this.renderer.addClass(this.hostElement.nativeElement, 'r-transition');
     }));

@@ -1,0 +1,6 @@
+@import 'global/components';
+@import 'global/styles';
+
+@mixin r-theme-global() {
+  @include r-theme-components();
+}

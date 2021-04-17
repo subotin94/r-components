@@ -1,10 +1,14 @@
 @import "@r-components/mixins";
 
 :host {
-  @include block();
-  padding-top: 76px;
+  @include r-flex();
+  &.navbar-fixed {
+    padding-top: 76px;
+  }
 
   r-drawer-content {
     height: calc(100vh - 76px);
+    padding: 16px;
+    background-color: #EDF1F7;
   }
 }

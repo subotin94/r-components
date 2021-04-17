@@ -1,7 +1,6 @@
-@import "./checkbox.component.theme";
+@import "@r-components/mixins";
 
 :host {
-  @include r-checkbox-theme();
   .label {
     position: relative;
     display: inline-flex;

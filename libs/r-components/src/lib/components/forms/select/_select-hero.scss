@@ -1,0 +1,53 @@
+@import '../form-field/form-field.component.theme';
+
+@mixin select-hero {
+  r-select.appearance-hero .select-button {
+    border: none;
+  }
+
+  @each $size in r-get-sizes() {
+    r-select.appearance-hero.size-#{$size} .select-button {
+      padding: r-theme(select-hero-#{$size}-padding);
+      @include r-ltr(padding-right, r-theme(select-icon-offset));
+      @include r-rtl(padding-left, r-theme(select-icon-offset));
+    }
+    @include r-form-field-with-prefix('r-select.appearance-hero.size-#{$size} .select-button', $size);
+  }
+
+  @each $status in r-get-statuses() {
+    r-select.appearance-hero.status-#{$status} .select-button {
+      $left-color: r-theme(select-hero-#{$status}-left-background-color);
+      $right-color: r-theme(select-hero-#{$status}-right-background-color);
+      background-image: linear-gradient(to right, $left-color, $right-color);
+      color: r-theme(select-hero-#{$status}-text-color);
+
+      &.placeholder {
+        color: r-theme(select-hero-#{$status}-placeholder-text-color);
+      }
+
+      &:focus {
+        $left-color: r-theme(select-hero-#{$status}-focus-left-background-color);
+        $right-color: r-theme(select-hero-#{$status}-focus-right-background-color);
+        background-image: linear-gradient(to right, $left-color, $right-color);
+      }
+      &:hover {
+        $left-color: r-theme(select-hero-#{$status}-hover-left-background-color);
+        $right-color: r-theme(select-hero-#{$status}-hover-right-background-color);
+        background-image: linear-gradient(to right, $left-color, $right-color);
+      }
+      &[disabled] {
+        color: r-theme(select-hero-#{$status}-disabled-text-color);
+        background-color: r-theme(select-hero-#{$status}-disabled-background-color);
+        background-image: none;
+
+        r-icon {
+          color: r-theme(select-hero-#{$status}-disabled-icon-color);
+        }
+      }
+
+      r-icon {
+        color: r-theme(select-hero-#{$status}-icon-color);
+      }
+    }
+  }
+}

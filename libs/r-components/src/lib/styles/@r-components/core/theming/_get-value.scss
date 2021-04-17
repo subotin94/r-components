@@ -1,0 +1,57 @@
+@function r-deep-find-value($theme, $key, $value) {
+  $parent-value: map-get($theme, $value);
+
+  @if ($parent-value != null) {
+    @return r-deep-find-value($theme, $value, $parent-value);
+  }
+
+  @return $value;
+}
+
+@function r-process-theme($theme) {
+  $processed-theme: ();
+  @each $key, $value in $theme {
+    $processed-theme: map-set($processed-theme, $key, r-deep-find-value($theme, $key, $value));
+  }
+  @return $processed-theme;
+}
+
+@function get-current-theme-name() {
+  @if ($r-theme-name != null) {
+    @return $r-theme-name;
+  }
+
+  @return get-last-enabled-theme();
+}
+
+@function r-theme($key) {
+
+  $value: ();
+
+  // in case of css custom properties - just returns var(--var-name) - the rest is a browser job
+  @if ($r-enable-css-custom-properties == true) {
+    // there is no way to check if variable exists as current execution context is outside of particular theme
+    // because we process css in this mode only once! (and not for each theme)
+    $value: var(--#{$key});
+  } @else {
+    // in a preprocess mode (r-install-global call) get ready value from $r-processed-theme variable
+    @if ($r-theme-process-mode == 'pre-process') {
+      $value: map-get($r-processed-theme, $key);
+    }
+
+    // otherwise lazily search for variable value
+    @if ($r-theme-process-mode == 'lazy-process') {
+
+      $r-theme-name: get-current-theme-name();
+
+      $theme: r-get-registered-theme($r-theme-name);
+      $value: r-deep-find-value($theme, $key, map-get($theme, $key));
+    }
+  }
+
+  @if ($value == null) {
+    @warn 'Nebular Theme: `r-theme()` cannot find value for key `' + $key + '` for theme `'+ $r-theme-name +'`';
+  }
+
+  @return $value;
+}

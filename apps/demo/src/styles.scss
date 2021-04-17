@@ -1,1 +1,72 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import '@r-components/theming';
+@import '@r-components/themes/default';
+
+@include r-install() {
+  // @include r-theme-global();
+};
+
+html,
+body {
+  min-height: 100%;
+  overflow: hidden;
+  color: #151a30;
+}
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+}
+
+.docs-markdown {
+  p, td {
+    code {
+      padding: 3px 5px;
+      background: rgba(0, 0, 0, 0.07);
+      border-radius: 4px;
+    }
+  }
+  pre {
+    background: white;
+    border: 0.5px solid #8f9bb3;
+    border-radius: 5px;
+    display: block;
+    margin: 16px auto;
+    overflow-x: auto;
+    padding: 20px;
+    white-space: pre-wrap;
+    font-size: 14px;
+    // code {
+    //   &.language-ts {
+    //   }
+    // }
+  }
+}
+
+td {
+  padding: 0 4px;
+}
+
+td:first-of-type {
+  white-space: nowrap !important;
+}
+
+.hljs {
+  background: white !important;
+  color: #151a30 !important;
+  padding: 0 !important;
+  &-meta {
+    color: #e2c07b !important;
+  }
+  &-keyword {
+    color: #b473dd !important;
+  }
+  &-string {
+    color: #95c372 !important;
+  }
+  &-title {
+    color: #e2c07b !important;
+  }
+  .hljs-built_in {
+    color: #b473dd !important;
+  }
+}

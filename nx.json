@@ -1,14 +1,14 @@
 {
-  "npmScope": "r-components",
-  "affected": { "defaultBase": "master" },
   "implicitDependencies": {
-    "workspace.json": "*",
+    "angular.json": "*",
     "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
+  "affected": { "defaultBase": "master" },
+  "npmScope": "r-components",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
@@ -16,8 +16,10 @@
     }
   },
   "projects": {
-    "r-components": { "tags": ["scope:public", "type:util", "target:all"] },
     "demo": { "tags": [] },
-    "demo-e2e": { "tags": [], "implicitDependencies": ["demo"] }
+    "demo-e2e": { "tags": [], "implicitDependencies": ["demo"] },
+    "r-components": { "tags": ["scope:public", "type:util", "target:all"] },
+    "r-docs": { "tags": [] },
+    "r-docs-gateway": { "tags": [] }
   }
 }

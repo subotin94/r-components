@@ -29,4 +29,4 @@ import {RSidenav, RSidenavContainer, RSidenavContent} from './sidenav';
     RSidenavContent,
   ],
 })
-export class RSidenavModule {}
+export class RSidenavModule { }

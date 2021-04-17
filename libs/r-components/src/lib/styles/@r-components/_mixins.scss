@@ -1,6 +1,12 @@
-@mixin block() {
+@mixin r-block-page() {
   display: block;
   min-height: 100%;
+}
+
+@mixin r-flex() {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
 }
 
 @mixin r-outline($outline-width, $outline-color, $options: (inset-shadow: false)) {
